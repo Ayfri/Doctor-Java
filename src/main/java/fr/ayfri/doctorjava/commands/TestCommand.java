@@ -1,7 +1,7 @@
 package fr.ayfri.doctorjava.commands;
 
 import fr.ayfri.doctorjava.entities.Category;
-import fr.ayfri.doctorjava.entities.CommandInformations;
+import fr.ayfri.doctorjava.entities.CommandInformation;
 import fr.ayfri.doctorjava.entities.Tag;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@CommandInformations(
+@CommandInformation(
 	name = "test",
 	description = "C'est juste une commande de tests, faites pas attention mdr",
 	tags = { Tag.CONTRIBUTOR_ONLY },

@@ -2,7 +2,7 @@ package fr.ayfri.doctorjava.commands;
 
 import fr.ayfri.doctorjava.entities.ArgType;
 import fr.ayfri.doctorjava.entities.Category;
-import fr.ayfri.doctorjava.entities.CommandInformations;
+import fr.ayfri.doctorjava.entities.CommandInformation;
 import fr.ayfri.doctorjava.entities.Tag;
 import fr.ayfri.doctorjava.utils.ArgUtils;
 import fr.ayfri.doctorjava.utils.FormatUtils;
@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.awt.*;
 import java.util.ArrayList;
 
-@CommandInformations(
+@CommandInformation(
 	name = "help",
 	category = Category.UTILS,
 	tags = { Tag.HELP_COMMAND },
@@ -29,7 +29,7 @@ public class HelpCommand extends Command {
 		embed.setColor(new Color(239, 86, 42));
 		
 		if (commandArg != null) {
-			final Command command = CommandManager.getCommandByNameOrAliases(commandArg);
+			final Command command = CommandManager.getCommandByNameOrAlias(commandArg);
 			embed.setTitle("Informations de la commande : " + commandArg);
 			embed.setDescription(command.getDescription());
 			embed.addField("Catégorie : ", command.getCategory().getName(), false);
@@ -61,7 +61,7 @@ public class HelpCommand extends Command {
 			
 			StringBuilder description = new StringBuilder();
 			final ArrayList<Command> commands = new ArrayList<>(CommandManager.commands.values());
-			commands.sort(Command.comparator);
+			commands.sort(Command.COMPARATOR);
 			for (final Command command : commands) {
 				description.append("`").append(command.getName()).append("` : ").append(command.getDescription()).append("\n");
 			}

@@ -2,7 +2,7 @@ package fr.ayfri.doctorjava.commands;
 
 import com.sun.management.OperatingSystemMXBean;
 import fr.ayfri.doctorjava.entities.Category;
-import fr.ayfri.doctorjava.entities.CommandInformations;
+import fr.ayfri.doctorjava.entities.CommandInformation;
 import fr.ayfri.doctorjava.utils.Constants;
 import fr.ayfri.doctorjava.utils.FormatUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -15,7 +15,7 @@ import java.lang.management.ManagementFactory;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 
-@CommandInformations(name = "botinfo",
+@CommandInformation(name = "botinfo",
 	description = "Donne des informations sur le bot.",
 	aliases = { "bot", "binfo" },
 	category = Category.INFO

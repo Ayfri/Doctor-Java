@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Logger {
+	
+	public static final char MAGIC_CHAR = (char) 27;
+	
 	public static void log(String message, String title) {
 		process(message, LogType.LOG, title);
 	}
@@ -13,7 +16,7 @@ public class Logger {
 	private static void process(String message, LogType type, String title) {
 		SimpleDateFormat format = new SimpleDateFormat("[dd/MM/yy hh:mm:ss.SSS]");
 		String log =
-			(char) 27 + "[" + type.getColor() + "m" +
+			MAGIC_CHAR + "[" + type.getColor() + "m" +
 			format.format(new Date()) +
 			"[" + type.toString().toUpperCase() + "]"
 			+ "[" + title + "] "

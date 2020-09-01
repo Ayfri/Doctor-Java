@@ -53,7 +53,7 @@ public class ArgUtils {
 	public static void argError(String reason, Command command, MessageReceivedEvent event) {
 		EmbedBuilder embed = new EmbedBuilder();
 		embed.setAuthor("Commande exécutée par : " + event.getAuthor().getAsTag());
-		embed.setTitle("La commande " + command.getName() + " n'a pas pu s'exécutée.");
+		embed.setTitle("La commande " + command.getName() + " n'a pas pu s'exécuter.");
 		embed.setDescription("Raison : **`" + reason + "`**");
 		
 		event.getTextChannel().sendMessage(embed.build()).queue();

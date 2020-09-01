@@ -2,8 +2,6 @@ package fr.ayfri.doctorjava.utils;
 
 import fr.ayfri.doctorjava.Main;
 
-import java.util.Collection;
-
 public class Utils {
 	
 	public static boolean isOwner(String id) {
@@ -20,5 +18,4 @@ public class Utils {
 		
 		return prefixUsed;
 	}
-	
 }

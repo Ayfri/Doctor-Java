@@ -1,13 +1,13 @@
 package fr.ayfri.doctorjava.commands;
 
 import fr.ayfri.doctorjava.entities.ArgType;
-import fr.ayfri.doctorjava.entities.CommandInformations;
+import fr.ayfri.doctorjava.entities.CommandInformation;
 import fr.ayfri.doctorjava.entities.Tag;
 import fr.ayfri.doctorjava.utils.ArgUtils;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-@CommandInformations(
+@CommandInformation(
 	name = "javadoc",
 	aliases = { "doc" },
 	tags = { Tag.NOT_STABLE },
@@ -15,6 +15,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 	usage = "javadoc <Chemin D'une Classe> [numéro du JDK]"
 )
 public class JavaDocCommand extends Command {
+		public static final int LAST_JDK_VERSION = 14;
+		public static final int FIRST_JDK_VERSION_WITH_WEBSITES = 7;
+		
 	@Override
 	public void execute(final MessageReceivedEvent event) {
 		Message m = event.getTextChannel().sendMessage("Recherche de la classe dans la JavaDoc...").complete();
@@ -25,11 +28,11 @@ public class JavaDocCommand extends Command {
 		
 		if (versionArgString != null) {
 			versionArg = Integer.parseInt(versionArgString);
-			if (versionArg < 7) {
+			if (versionArg < FIRST_JDK_VERSION_WITH_WEBSITES) {
 				event.getTextChannel().sendMessage("Désolé le JDK " + versionArg + " utilise une architecture qui fait qu'elle n'est pas parsable.").queue();
 				return;
 			}
-			if (versionArg > 14) {
+			if (versionArg > LAST_JDK_VERSION) {
 				event.getTextChannel().sendMessage("Hey Java " + versionArg + " existe pas encore hein ;)").queue();
 				return;
 			}

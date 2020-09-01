@@ -36,7 +36,6 @@ public class JavaDocCommandUtils {
 				e.printStackTrace();
 			}
 			
-			
 			message.editMessage("La classe n'a pas été trouvé.").queue();
 		}
 	}
@@ -67,18 +66,21 @@ public class JavaDocCommandUtils {
 	
 	public static String getLinkFromPackage(String packageName, int version) {
 		final String[] jdkNextBasePackage = new String[]{ "io", "lang", "math", "net", "nio", "security", "text", "time", "util" };
-		final String link = version > 10 ? "https://docs.oracle.com/en/java/javase/" : "https://docs.oracle.com/javase/";
+		final int newJavaDocJDKVersion = 10;
+		final String link = version > newJavaDocJDKVersion ? "https://docs.oracle.com/en/java/javase/" : "https://docs.oracle.com/javase/";
 		String[] packages = packageName.split("\\.");
 		StringBuilder url = new StringBuilder(link + version + "/docs/api/");
 		int index = 2;
 		
-		url.append(version > 10 ? "java" : packages[0]).append(version > 10 ? "." : "/").append(packages[1]);
-		if (version > 10) {
-			if (packages[0].equals("javax")) { // For 'javax' classes
+		url.append(version > newJavaDocJDKVersion ? "java" : packages[0]).append(version > newJavaDocJDKVersion ? "." : "/").append(packages[1]);
+		if (version > newJavaDocJDKVersion) {
+			// For 'javax' classes
+			if ("javax".equals(packages[0])) {
 				url.append("javax/").append(packages[1]);
 			}
 			
-			if (packages[0].equals("com")) { // For 'jdk' classes
+			// For 'jdk' classes
+			if ("com".equals(packages[0])) {
 				url = new StringBuilder(link + version + "/docs/api/jdk." + packages[1]);
 				index = 0;
 			}
@@ -114,7 +116,7 @@ public class JavaDocCommandUtils {
 		// todo GENERICS
 		
 		for (final Element element : headerElements) {
-			final Elements AElements = element.select("dd > code > a");
+			final Elements aElements = element.select("dd > code > a");
 			final String join = FormatUtils.join(element.parent().select("pre").eachText(), " ");
 			final String headerElement = element.select("dt").text();
 			
@@ -124,26 +126,32 @@ public class JavaDocCommandUtils {
 			 *
 			 * t'as essayé de corriger et ça marche pas, tu continueras mais t'es sur la bonne voix frère
 			 */
-			final String packageList = EmbedUtils.cutForField(transformElementsToPackageList(AElements));
+			final String packageList = EmbedUtils.cutForField(transformElementsToPackageList(aElements));
 			
 			if (!join.toLowerCase().contains(typeText.toLowerCase())) {
 				continue;
 			}
+			
 			if (headerElement.contains("Known Subclasses")) {
 				embed.addField("Classes filles :", packageList, true);
 			}
+			
 			if (headerElement.contains("Known Subinterfaces")) {
 				embed.addField("Interfaces filles :", packageList, true);
 			}
+			
 			if (headerElement.contains("All Superinterfaces")) {
-				embed.addField("Interfaces mères :", EmbedUtils.cutForField(formatToInheritance(AElements)), true);
+				embed.addField("Interfaces mères :", EmbedUtils.cutForField(formatToInheritance(aElements)), true);
 			}
+			
 			if (headerElement.contains("Implemented Interfaces")) {
 				embed.addField("Interfaces implémentées :", packageList, true);
 			}
+			
 			if (headerElement.contains("Implementing Classes")) {
 				embed.addField("Classes implémentant cette interface :", packageList, true);
 			}
+			
 			if (element.select("dt > span").text().contains("Since:")) {
 				for (final Element ddElement : element.select("dd")) {
 					if (ddElement.text().matches("[0-9]\\.[0-9]")) {
@@ -164,7 +172,7 @@ public class JavaDocCommandUtils {
 			embed.addField("Héritage :", formatToInheritance(inheritance), false);
 		}
 		
-		if (type.equals("class")) {
+		if ("class".equals(type)) {
 			type = "la classe";
 		} else {
 			type = "l'" + type;

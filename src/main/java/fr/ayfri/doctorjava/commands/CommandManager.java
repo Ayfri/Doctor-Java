@@ -21,10 +21,10 @@ public class CommandManager {
 		Logger.log("Command '" + command.getName() + "' added.", "CommandManager");
 	}
 	
-	public static Command getCommandByNameOrAliases(String nameOrAlias) {
+	public static Command getCommandByNameOrAlias(String name) {
 		return commands.values().stream().filter(command ->
-			                                         command.getName().equals(nameOrAlias) ||
-			                                         Arrays.asList(command.getAliases()).contains(nameOrAlias)
+			                                         command.getName().equals(name) ||
+			                                         Arrays.asList(command.getAliases()).contains(name)
 		).findFirst().orElseThrow();
 	}
 }

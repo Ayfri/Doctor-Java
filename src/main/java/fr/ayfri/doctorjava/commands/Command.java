@@ -1,7 +1,7 @@
 package fr.ayfri.doctorjava.commands;
 
 import fr.ayfri.doctorjava.entities.Category;
-import fr.ayfri.doctorjava.entities.CommandInformations;
+import fr.ayfri.doctorjava.entities.CommandInformation;
 import fr.ayfri.doctorjava.entities.CommandPermissions;
 import fr.ayfri.doctorjava.entities.Tag;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -19,15 +19,15 @@ public abstract class Command {
 	private String description;
 	private String name;
 	
-	public final static Comparator<Command> comparator = Comparator.comparing(Command::getName);
+	public final static Comparator<Command> COMPARATOR = Comparator.comparing(Command::getName);
 	
 	public Command() {
-		name = getClass().getAnnotation(CommandInformations.class).name();
-		description = getClass().getAnnotation(CommandInformations.class).description();
-		category = getClass().getAnnotation(CommandInformations.class).category();
-		usage = getClass().getAnnotation(CommandInformations.class).usage();
-		aliases = getClass().getAnnotation(CommandInformations.class).aliases();
-		tags = new ArrayList<>(Arrays.asList(getClass().getAnnotation(CommandInformations.class).tags()));
+		name = getClass().getAnnotation(CommandInformation.class).name();
+		description = getClass().getAnnotation(CommandInformation.class).description();
+		category = getClass().getAnnotation(CommandInformation.class).category();
+		usage = getClass().getAnnotation(CommandInformation.class).usage();
+		aliases = getClass().getAnnotation(CommandInformation.class).aliases();
+		tags = new ArrayList<>(Arrays.asList(getClass().getAnnotation(CommandInformation.class).tags()));
 		permissions = new CommandPermissions(this);
 		
 		CommandManager.addCommand(this);

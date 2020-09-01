@@ -44,10 +44,10 @@ public class EventManager {
 				);
 			}
 			
-			final Command command = CommandManager.getCommandByNameOrAliases(commandArg);
+			final Command command = CommandManager.getCommandByNameOrAlias(commandArg);
 			Logger.log("Command '" + command + "' executed" +
 			           (event.isFromGuild() ?
-			            " on guild '" + event.getGuild().getName() + "' " :
+			            " on the guild '" + event.getGuild().getName() + "' " :
 			            " on private messages ")
 			           + "by '" + event.getAuthor().getAsTag() + "'.", "MessageReceivedEvent");
 			
