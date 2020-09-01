@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+compileJava.options.encoding = 'UTF-8'
+group 'fr.ayfri'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_200'
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+}
